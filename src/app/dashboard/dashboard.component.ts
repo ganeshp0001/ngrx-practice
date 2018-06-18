@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { Store, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HindiAction, EnglishAction } from '../redux/actions';
 
-interface AppState {
-  message: string;
-}
+import { HindiAction, EnglishAction, LoadUsersAction } from '../redux/actions';
+import * as selectors from '../redux/reducers/users.reducer';
+import {AppState, User, UserState} from '../models';
 
 
 @Component({
@@ -23,9 +22,16 @@ export class DashboardComponent {
   ];
 
   message$ :Observable<string>;
+  users$ : Observable<User[]>;
 
   constructor(private store: Store<AppState> ){
     this.message$ = this.store.select('message');
+    this.users$   = this.store.select(selectors.getUsers);
+    // this.store.select(selectors.getUsers).subscribe( state => {
+    //   console.log('SELECTOR GOT', state);
+    // })
+    this.store.dispatch(new LoadUsersAction());
+    console.log(this.users$);
   }
 
   hindiMsg(){

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
  */
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { postsReducer } from './redux/reducers/posts.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import { reducers } from './redux/reducers';
+import { UsersEffects } from './redux/effects/users.effects';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { postsReducer } from './redux/reducers/posts.reducer';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -35,11 +40,13 @@ import { postsReducer } from './redux/reducers/posts.reducer';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    StoreModule.forRoot({message: postsReducer}),
+    
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([UsersEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
-    }),    
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
