@@ -1,9 +1,5 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard </h1>
-  <h2>{{ message$ | async }}</h2>
-
-  <button mat-raised-button (click)="hindiMsg()">Hindi</button>
-  <button mat-raised-button (click)="englishMsg()">English</button>
 
   <mat-grid-list cols="3" rowHeight="350px" *ngIf="(users$ | async).length">
     <mat-grid-tile *ngFor="let user of (users$ | async)" [colspan]="1" [rowspan]="1">

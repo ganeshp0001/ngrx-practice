@@ -1,30 +1,37 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppNavComponent } from './app-nav/app-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatButton } from '@angular/material';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppNavComponent } from "./app-nav/app-nav.component";
+import { LayoutModule } from "@angular/cdk/layout";
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatButton
+} from "@angular/material";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 /**
  * NGRX specific imports
  */
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
-import { reducers } from './redux/reducers';
-import { UsersEffects } from './redux/effects/users.effects';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { reducers } from "./redux/reducers";
+import { UsersEffects } from "./redux/effects/users.effects";
+import { CarsEffects } from "./redux/effects/cars.effects";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AppNavComponent,
-    DashboardComponent
-  ],
+  declarations: [AppComponent, AppNavComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,15 +47,15 @@ import { UsersEffects } from './redux/effects/users.effects';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    
+
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UsersEffects]),
+    EffectsModule.forRoot([UsersEffects, CarsEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-    }),
+      maxAge: 25 // Retains last 25 states
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { HindiAction, EnglishAction, LoadUsersAction } from '../redux/actions';
+import { HindiAction, EnglishAction, LoadUsersAction, LoadCarsAction} from '../redux/actions';
 import * as selectors from '../redux/reducers/users.reducer';
 import {AppState, User, UserState} from '../models';
 
@@ -31,6 +31,7 @@ export class DashboardComponent {
     //   console.log('SELECTOR GOT', state);
     // })
     this.store.dispatch(new LoadUsersAction());
+    this.store.dispatch(new LoadCarsAction());
     console.log(this.users$);
   }
 
